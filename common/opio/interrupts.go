@@ -26,3 +26,32 @@ func BlockOnInterruptsContext(ctx context.Context, signals ...os.Signal) {
 		signal.Stop(interruptChannel)
 	}
 }
+
+type interruptContextKeyType struct{}
+
+var blockerContextKey = interruptContextKeyType{}
+
+type interruptCatcher struct {
+	incoming chan os.Signal
+}
+
+func (c *interruptCatcher) Block(ctx context.Context) {
+	select {
+	case <-c.incoming:
+	case <-ctx.Done():
+	}
+}
+
+type BlockFn func(ctx context.Context)
+
+func WithInterruptBlocker(ctx context.Context) context.Context {
+	if ctx.Value(blockerContextKey) != nil { // already has an interrupt handler
+		return ctx
+	}
+	catcher := &interruptCatcher{
+		incoming: make(chan os.Signal, 10),
+	}
+	signal.Notify(catcher.incoming, DefaultInterruptSignals...)
+
+	return context.WithValue(ctx, blockerContextKey, BlockFn(catcher.Block))
+}

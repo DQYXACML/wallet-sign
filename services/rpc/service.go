@@ -30,8 +30,10 @@ func (s *RpcService) Stopped() bool {
 	return s.stopped.Load()
 }
 
-func NewRpcService() (*RpcService, error) {
-	rpcService := &RpcService{}
+func NewRpcService(conf *config.Config) (*RpcService, error) {
+	rpcService := &RpcService{
+		conf: conf,
+	}
 	return rpcService, nil
 }
 

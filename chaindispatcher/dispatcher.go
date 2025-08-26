@@ -127,6 +127,17 @@ func (c *ChainDispatcher) BuildAndSignBatchTransaction(ctx context.Context, requ
 	return c.registry[request.ChainName].BuildAndSignBatchTransaction(ctx, request)
 }
 
+func (c *ChainDispatcher) SignTransactionMessage(ctx context.Context, request *wallet.SignTransactionMessageRequest) (*wallet.SignTransactionMessageResponse, error) {
+	resp := c.preHandler(request)
+	if resp != nil {
+		return &wallet.SignTransactionMessageResponse{
+			Code:    resp.Code,
+			Message: resp.Msg,
+		}, nil
+	}
+	return c.registry[request.ChainName].SignTransactionMessage(ctx, request)
+}
+
 func (c *ChainDispatcher) Interceptor(ctx context.Context, request interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 	defer func() {
 		if e := recover(); e != nil {
