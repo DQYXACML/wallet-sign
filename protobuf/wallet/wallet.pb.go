@@ -1123,6 +1123,142 @@ func (x *BuildAndSignBatchTransactionResponse) GetTxWithSign() []*TransactionWit
 	return nil
 }
 
+type SignTransactionMessageRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ConsumerToken string                 `protobuf:"bytes,1,opt,name=consumer_token,json=consumerToken,proto3" json:"consumer_token,omitempty"`
+	ChainName     string                 `protobuf:"bytes,2,opt,name=chain_name,json=chainName,proto3" json:"chain_name,omitempty"`
+	Network       string                 `protobuf:"bytes,3,opt,name=network,proto3" json:"network,omitempty"`
+	PublicKey     string                 `protobuf:"bytes,4,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
+	MessageHash   string                 `protobuf:"bytes,5,opt,name=message_hash,json=messageHash,proto3" json:"message_hash,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SignTransactionMessageRequest) Reset() {
+	*x = SignTransactionMessageRequest{}
+	mi := &file_protobuf_wallet_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SignTransactionMessageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SignTransactionMessageRequest) ProtoMessage() {}
+
+func (x *SignTransactionMessageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_wallet_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SignTransactionMessageRequest.ProtoReflect.Descriptor instead.
+func (*SignTransactionMessageRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_wallet_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *SignTransactionMessageRequest) GetConsumerToken() string {
+	if x != nil {
+		return x.ConsumerToken
+	}
+	return ""
+}
+
+func (x *SignTransactionMessageRequest) GetChainName() string {
+	if x != nil {
+		return x.ChainName
+	}
+	return ""
+}
+
+func (x *SignTransactionMessageRequest) GetNetwork() string {
+	if x != nil {
+		return x.Network
+	}
+	return ""
+}
+
+func (x *SignTransactionMessageRequest) GetPublicKey() string {
+	if x != nil {
+		return x.PublicKey
+	}
+	return ""
+}
+
+func (x *SignTransactionMessageRequest) GetMessageHash() string {
+	if x != nil {
+		return x.MessageHash
+	}
+	return ""
+}
+
+type SignTransactionMessageResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          ReturnCode             `protobuf:"varint,1,opt,name=Code,proto3,enum=wallet.ReturnCode" json:"Code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Signature     string                 `protobuf:"bytes,3,opt,name=signature,proto3" json:"signature,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SignTransactionMessageResponse) Reset() {
+	*x = SignTransactionMessageResponse{}
+	mi := &file_protobuf_wallet_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SignTransactionMessageResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SignTransactionMessageResponse) ProtoMessage() {}
+
+func (x *SignTransactionMessageResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_wallet_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SignTransactionMessageResponse.ProtoReflect.Descriptor instead.
+func (*SignTransactionMessageResponse) Descriptor() ([]byte, []int) {
+	return file_protobuf_wallet_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *SignTransactionMessageResponse) GetCode() ReturnCode {
+	if x != nil {
+		return x.Code
+	}
+	return ReturnCode_ERROR
+}
+
+func (x *SignTransactionMessageResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *SignTransactionMessageResponse) GetSignature() string {
+	if x != nil {
+		return x.Signature
+	}
+	return ""
+}
+
 var File_protobuf_wallet_proto protoreflect.FileDescriptor
 
 const file_protobuf_wallet_proto_rawDesc = "" +
@@ -1217,16 +1353,29 @@ const file_protobuf_wallet_proto_rawDesc = "" +
 	"\x04code\x18\x01 \x01(\x0e2\x12.wallet.ReturnCodeR\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12=\n" +
 	"\ftx_with_sign\x18\x03 \x03(\v2\x1b.wallet.TransactionWithSignR\n" +
-	"txWithSign*$\n" +
+	"txWithSign\"\xc1\x01\n" +
+	"\x1dSignTransactionMessageRequest\x12%\n" +
+	"\x0econsumer_token\x18\x01 \x01(\tR\rconsumerToken\x12\x1d\n" +
+	"\n" +
+	"chain_name\x18\x02 \x01(\tR\tchainName\x12\x18\n" +
+	"\anetwork\x18\x03 \x01(\tR\anetwork\x12\x1d\n" +
+	"\n" +
+	"public_key\x18\x04 \x01(\tR\tpublicKey\x12!\n" +
+	"\fmessage_hash\x18\x05 \x01(\tR\vmessageHash\"\x80\x01\n" +
+	"\x1eSignTransactionMessageResponse\x12&\n" +
+	"\x04Code\x18\x01 \x01(\x0e2\x12.wallet.ReturnCodeR\x04Code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12\x1c\n" +
+	"\tsignature\x18\x03 \x01(\tR\tsignature*$\n" +
 	"\n" +
 	"ReturnCode\x12\t\n" +
 	"\x05ERROR\x10\x00\x12\v\n" +
-	"\aSUCCESS\x10\x012\xa5\x05\n" +
+	"\aSUCCESS\x10\x012\x90\x06\n" +
 	"\rWalletService\x12[\n" +
 	"\x12getChainSignMethod\x12!.wallet.GetChainSignMethodRequest\x1a\".wallet.GetChainSignMethodResponse\x12O\n" +
 	"\x0egetChainSchema\x12\x1d.wallet.getChainSchemaRequest\x1a\x1e.wallet.getChainSchemaResponse\x12\x84\x01\n" +
 	"!createKeyPairsExportPublicKeyList\x12..wallet.CreateKeyPairAndExportPublicKeyRequest\x1a/.wallet.CreateKeyPairAndExportPublicKeyResponse\x12x\n" +
-	"\x1bcreateKeyPairsWithAddresses\x12*.wallet.CreateKeyPairsWithAddressesRequest\x1a+.wallet.CreateKeyPairsWithAddressesResponse\"\x00\x12j\n" +
+	"\x1bcreateKeyPairsWithAddresses\x12*.wallet.CreateKeyPairsWithAddressesRequest\x1a+.wallet.CreateKeyPairsWithAddressesResponse\"\x00\x12i\n" +
+	"\x16signTransactionMessage\x12%.wallet.SignTransactionMessageRequest\x1a&.wallet.SignTransactionMessageResponse\"\x00\x12j\n" +
 	"\x17buildAndSignTransaction\x12&.wallet.BuildAndSignTransactionRequest\x1a'.wallet.BuildAndSignTransactionResponse\x12y\n" +
 	"\x1cbuildAndSignBatchTransaction\x12+.wallet.BuildAndSignBatchTransactionRequest\x1a,.wallet.BuildAndSignBatchTransactionResponseB\x13Z\x11./protobuf/walletb\x06proto3"
 
@@ -1243,7 +1392,7 @@ func file_protobuf_wallet_proto_rawDescGZIP() []byte {
 }
 
 var file_protobuf_wallet_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_protobuf_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_protobuf_wallet_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_protobuf_wallet_proto_goTypes = []any{
 	(ReturnCode)(0),                                 // 0: wallet.ReturnCode
 	(*GetChainSignMethodRequest)(nil),               // 1: wallet.GetChainSignMethodRequest
@@ -1262,6 +1411,8 @@ var file_protobuf_wallet_proto_goTypes = []any{
 	(*TransactionWithSign)(nil),                     // 14: wallet.TransactionWithSign
 	(*BuildAndSignBatchTransactionRequest)(nil),     // 15: wallet.BuildAndSignBatchTransactionRequest
 	(*BuildAndSignBatchTransactionResponse)(nil),    // 16: wallet.BuildAndSignBatchTransactionResponse
+	(*SignTransactionMessageRequest)(nil),           // 17: wallet.SignTransactionMessageRequest
+	(*SignTransactionMessageResponse)(nil),          // 18: wallet.SignTransactionMessageResponse
 }
 var file_protobuf_wallet_proto_depIdxs = []int32{
 	0,  // 0: wallet.GetChainSignMethodResponse.code:type_name -> wallet.ReturnCode
@@ -1274,23 +1425,26 @@ var file_protobuf_wallet_proto_depIdxs = []int32{
 	13, // 7: wallet.BuildAndSignBatchTransactionRequest.tx_msg:type_name -> wallet.TransactionMessage
 	0,  // 8: wallet.BuildAndSignBatchTransactionResponse.code:type_name -> wallet.ReturnCode
 	14, // 9: wallet.BuildAndSignBatchTransactionResponse.tx_with_sign:type_name -> wallet.TransactionWithSign
-	1,  // 10: wallet.WalletService.getChainSignMethod:input_type -> wallet.GetChainSignMethodRequest
-	3,  // 11: wallet.WalletService.getChainSchema:input_type -> wallet.getChainSchemaRequest
-	6,  // 12: wallet.WalletService.createKeyPairsExportPublicKeyList:input_type -> wallet.CreateKeyPairAndExportPublicKeyRequest
-	9,  // 13: wallet.WalletService.createKeyPairsWithAddresses:input_type -> wallet.CreateKeyPairsWithAddressesRequest
-	11, // 14: wallet.WalletService.buildAndSignTransaction:input_type -> wallet.BuildAndSignTransactionRequest
-	15, // 15: wallet.WalletService.buildAndSignBatchTransaction:input_type -> wallet.BuildAndSignBatchTransactionRequest
-	2,  // 16: wallet.WalletService.getChainSignMethod:output_type -> wallet.GetChainSignMethodResponse
-	4,  // 17: wallet.WalletService.getChainSchema:output_type -> wallet.getChainSchemaResponse
-	7,  // 18: wallet.WalletService.createKeyPairsExportPublicKeyList:output_type -> wallet.CreateKeyPairAndExportPublicKeyResponse
-	10, // 19: wallet.WalletService.createKeyPairsWithAddresses:output_type -> wallet.CreateKeyPairsWithAddressesResponse
-	12, // 20: wallet.WalletService.buildAndSignTransaction:output_type -> wallet.BuildAndSignTransactionResponse
-	16, // 21: wallet.WalletService.buildAndSignBatchTransaction:output_type -> wallet.BuildAndSignBatchTransactionResponse
-	16, // [16:22] is the sub-list for method output_type
-	10, // [10:16] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	0,  // 10: wallet.SignTransactionMessageResponse.Code:type_name -> wallet.ReturnCode
+	1,  // 11: wallet.WalletService.getChainSignMethod:input_type -> wallet.GetChainSignMethodRequest
+	3,  // 12: wallet.WalletService.getChainSchema:input_type -> wallet.getChainSchemaRequest
+	6,  // 13: wallet.WalletService.createKeyPairsExportPublicKeyList:input_type -> wallet.CreateKeyPairAndExportPublicKeyRequest
+	9,  // 14: wallet.WalletService.createKeyPairsWithAddresses:input_type -> wallet.CreateKeyPairsWithAddressesRequest
+	17, // 15: wallet.WalletService.signTransactionMessage:input_type -> wallet.SignTransactionMessageRequest
+	11, // 16: wallet.WalletService.buildAndSignTransaction:input_type -> wallet.BuildAndSignTransactionRequest
+	15, // 17: wallet.WalletService.buildAndSignBatchTransaction:input_type -> wallet.BuildAndSignBatchTransactionRequest
+	2,  // 18: wallet.WalletService.getChainSignMethod:output_type -> wallet.GetChainSignMethodResponse
+	4,  // 19: wallet.WalletService.getChainSchema:output_type -> wallet.getChainSchemaResponse
+	7,  // 20: wallet.WalletService.createKeyPairsExportPublicKeyList:output_type -> wallet.CreateKeyPairAndExportPublicKeyResponse
+	10, // 21: wallet.WalletService.createKeyPairsWithAddresses:output_type -> wallet.CreateKeyPairsWithAddressesResponse
+	18, // 22: wallet.WalletService.signTransactionMessage:output_type -> wallet.SignTransactionMessageResponse
+	12, // 23: wallet.WalletService.buildAndSignTransaction:output_type -> wallet.BuildAndSignTransactionResponse
+	16, // 24: wallet.WalletService.buildAndSignBatchTransaction:output_type -> wallet.BuildAndSignBatchTransactionResponse
+	18, // [18:25] is the sub-list for method output_type
+	11, // [11:18] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_wallet_proto_init() }
@@ -1304,7 +1458,7 @@ func file_protobuf_wallet_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protobuf_wallet_proto_rawDesc), len(file_protobuf_wallet_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   16,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

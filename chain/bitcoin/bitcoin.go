@@ -29,6 +29,27 @@ type ChainAdaptor struct {
 	signer ssm.Signer
 }
 
+func (c *ChainAdaptor) SignTransactionMessage(ctx context.Context, req *wallet.SignTransactionMessageRequest) (*wallet.SignTransactionMessageResponse, error) {
+	resp := &wallet.SignTransactionMessageResponse{
+		Code: wallet.ReturnCode_ERROR,
+	}
+
+	privKey, isOk := c.db.GetPrivKey(req.PublicKey)
+	if !isOk {
+		return nil, errors.New("get private key by public key fail")
+	}
+
+	signature, err := c.signer.SignMessage(privKey, req.MessageHash)
+	if err != nil {
+		log.Error("sign message fail", "err", err)
+		return nil, err
+	}
+	resp.Message = "sign tx message success"
+	resp.Signature = signature
+	resp.Code = wallet.ReturnCode_SUCCESS
+	return resp, nil
+}
+
 func (c *ChainAdaptor) GetChainSignMethod(ctx context.Context, req *wallet.GetChainSignMethodRequest) (*wallet.GetChainSignMethodResponse, error) {
 	return &wallet.GetChainSignMethodResponse{
 		Code:       wallet.ReturnCode_SUCCESS,
